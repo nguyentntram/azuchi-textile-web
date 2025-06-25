@@ -1,10 +1,15 @@
-import { v2 as cloudinary } from "cloudinary"
 import productModel from "../models/productModel.js"
-
-// function for add product
-const addProduct = async (req, res) => {
+import { v2 as cloudinary } from "cloudinary"
+// Function for adding product
+const addProduct = async(req, res) => {
     try {
-        const { name, description, price, category, subCategory, sizes, bestseller } = req.body
+        const { name, description, category, subCategory, bestseller } = req.body
+
+        let pr = req.body.pr;
+        let sizes = req.body.sizes;
+        // Parse string to array
+        pr = JSON.parse(pr);
+        sizes = JSON.parse(sizes);
 
         const image1 = req.files.image1 && req.files.image1[0]
         const image2 = req.files.image2 && req.files.image2[0]
@@ -12,77 +17,83 @@ const addProduct = async (req, res) => {
         const image4 = req.files.image4 && req.files.image4[0]
 
         const images = [image1, image2, image3, image4].filter((item) => item !== undefined)
-
-        let imagesUrl = await Promise.all(
+        let imageUrl = await Promise.all(
             images.map(async (item) => {
-                let result = await cloudinary.uploader.upload(item.path, { resource_type: 'image' });
+                let result = await cloudinary.uploader.upload(item.path, {resource_type: 'image'});
                 return result.secure_url
             })
         )
 
         const productData = {
-            name,
-            description,
-            category,
-            price: Number(price),
+            name, 
+            description, 
+            category, 
             subCategory,
-            bestseller: bestseller === "true" ? true : false,
-            sizes: JSON.parse(sizes),
-            image: imagesUrl,
+            bestseller: bestseller === 'true' ? true : false,
+            pr: pr,
+            sizes: sizes,
+            image: imageUrl,
             date: Date.now()
         }
-
         console.log(productData);
-
-        const product = new productModel(productData);
+        const product = new productModel(productData)
         await product.save()
 
-        res.json({ success: true, message: "Product Added" })
+        // const image1 = req.files.image1[0]
+        // const image2 = req.files.image2[0]
+        // const image3 = req.files.image3[0]
+        // const image4 = req.files.image4[0]
 
-    } catch (error) {
+        // const image1 = req.files.image1 ? req.files.image1[0] : null;
+        // const image2 = req.files.image2 ? req.files.image2[0] : null;
+        // const image3 = req.files.image3 ? req.files.image3[0] : null;
+        // const image4 = req.files.image4 ? req.files.image4[0] : null;
+
+        console.log(name, description, pr, category, subCategory, sizes, bestseller)
+        console.log(imageUrl)
+
+        res.json({ success: true, message: "Product added" })
+    } catch(error){
         console.log(error)
-        res.json({ success: false, message: error.message })
-    }
-}
-
-// function for list product
-const listProducts = async (req, res) => {
-    try {
         
-        const products = await productModel.find({});
-        res.json({success:true,products})
-
-    } catch (error) {
-        console.log(error)
-        res.json({ success: false, message: error.message })
+        res.json({success:false, message:error.message})
     }
 }
 
-// function for removing product
+// Function for listing product
+const listProduct = async (req, res) => {
+    try {
+        const products = await productModel.find({});
+        res.json({success:true, products})
+    } catch(error) {
+        console.log(error)
+        res.json({success:false, message: message.error})
+    }
+
+}
+
+// Function for removing product
 const removeProduct = async (req, res) => {
     try {
-        
         await productModel.findByIdAndDelete(req.body.id)
-        res.json({success:true,message:"Product Removed"})
-
-    } catch (error) {
+        res.json({success:true, message:"Product removed"})
+    } catch(error) {
         console.log(error)
-        res.json({ success: false, message: error.message })
+        res.json({success:false, message: message.error})
     }
+
 }
 
-// function for single product info
+// Function for single product info
 const singleProduct = async (req, res) => {
     try {
-        
         const { productId } = req.body
         const product = await productModel.findById(productId)
-        res.json({success:true,product})
-
-    } catch (error) {
+        res.json({success:true, product})
+    } catch (error){
         console.log(error)
-        res.json({ success: false, message: error.message })
+        res.json({success:false, message: message.error})
     }
 }
 
-export { listProducts, addProduct, removeProduct, singleProduct }
+export { addProduct, removeProduct, listProduct, singleProduct }

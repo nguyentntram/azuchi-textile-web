@@ -17,13 +17,15 @@ a.active hr{
   font-style: normal;
 }
 
+/* Hide the scrollbar on web browser */
 ::-webkit-scrollbar{
   display: none;
 }
 
+/* For smaller screens (phones)
 @media (max-width:640px) {
   a.active{
       background-color: black;
       color: white;
   }
-}
+} */

@@ -7,8 +7,8 @@ import ShopContextProvider from './context/ShopContext';
 import ReactDOM from 'react-dom/client';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-  <ShopContextProvider>
+  <BrowserRouter>  {/* for routing */}
+  <ShopContextProvider>  {/* for customing app content */}
     <App /> 
   </ShopContextProvider>
   </BrowserRouter>,

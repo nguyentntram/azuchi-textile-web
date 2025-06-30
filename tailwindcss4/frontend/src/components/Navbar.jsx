@@ -7,8 +7,15 @@ import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const[visible, setVisible] = useState(false);
-    const { setShowSearch, getCartCount } = useContext(ShopContext);
-    const navigate = useNavigate();
+    const { setShowSearch, getCartCount, token, setToken, setCartItems, navigate } = useContext(ShopContext);
+    //const navigate = useNavigate();
+
+    const logout = () => {
+        navigate('/login')
+        localStorage.removeItem('token')
+        setToken('')
+        setCartItems({})
+    }
     
   return (
     <div className='flex items-center justify-between py-5 font-medium'>
@@ -35,19 +42,26 @@ const Navbar = () => {
             <p>LIÊN HỆ</p>
             <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
         </NavLink>
+
       </ul>
 
       <div className='flex items-center gap-6'>
-        <img src={assets.search_icon} className='w-5 cursor-pointer' alt="search" onClick={() => {setShowSearch(true); navigate('/collection');}} />
+        <img onClick={()=> { setShowSearch(true); navigate('/collection') }} src={assets.search_icon} className='w-5 cursor-pointer' alt="" />
+        
         <div className='group relative'>
-            <Link to={'/login'}><img src={assets.profile_icon} className='w-5 cursor-pointer' /></Link>
-            <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
-                <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded'>
-                    <p className='cursor-pointer hover:text-black'>Hồ sơ</p>
-                    <p className='cursor-pointer hover:text-black'>Order</p>
-                    <p className='cursor-pointer hover:text-black'>Đăng xuất</p>
-                </div>
-            </div>
+          <img onClick={()=> token ? null : navigate('/login') } className='w-5 cursor-pointer' src={assets.profile_icon} alt="" />
+
+            {/* Dropdown menu  */}
+
+            {token && 
+              <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
+                  <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded'>
+                      <p className='cursor-pointer hover:text-black'>Hồ sơ</p>
+                      <p onClick={()=>navigate('/orders')} className='cursor-pointer hover:text-black'>Đơn hàng</p>
+                      <p onClick={logout} className='cursor-pointer hover:text-black'>Đăng xuất</p>
+                  </div>
+              </div>}
+
         </div>
         <Link to='/cart' className='relative'>
             <img src={assets.cart_icon} className='w-5 min-w-5' alt="" />

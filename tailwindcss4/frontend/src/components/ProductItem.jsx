@@ -7,7 +7,7 @@ const ProductItem = ({id, image, name, pr}) => {
     const minPrice = Array.isArray(pr) ? Math.min(...pr.map(p => p.price)) : 0;
     const maxPrice = Array.isArray(pr) ? Math.max(...pr.map(p => p.price)) : 0;
   return (
-    <Link className='text-gray-700 cursor-pointer' to={`/product/${id}`}>
+    <Link onClick={()=>scrollTo(0,0)} className='text-gray-700 cursor-pointer' to={`/product/${id}`}>
         <div className='overflow-hidden'>
             <img className='w-full h-[300px] object-cover hover:scale-110 transition ease-in-out' src={image[0]} alt='' />
         </div>
@@ -15,7 +15,6 @@ const ProductItem = ({id, image, name, pr}) => {
         <p className='text-sm font-medium'>
           {minPrice.toLocaleString()} - {maxPrice.toLocaleString()} {currency}
         </p>
-      
     </Link>
   )
 }

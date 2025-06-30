@@ -1,4 +1,3 @@
-import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
@@ -42,3 +41,7 @@ const App = () => {
 }
 
 export default App
+
+// This file is the app structure (the main layout and routing config)
+// Holds entire UI structure: Navbar, Footer, Routes, Pages, or anything user interacts with.
+// Defines all visible parts and routes

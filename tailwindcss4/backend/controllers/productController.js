@@ -5,11 +5,21 @@ const addProduct = async(req, res) => {
     try {
         const { name, description, category, subCategory, bestseller } = req.body
 
-        let pr = req.body.pr;
-        let sizes = req.body.sizes;
-        // Parse string to array
-        pr = JSON.parse(pr);
-        sizes = JSON.parse(sizes);
+        // let pr = req.body.pr;
+        // let sizes = req.body.sizes;
+        // // Parse string to array
+        // pr = JSON.parse(pr);
+        // sizes = JSON.parse(sizes);
+
+        let pr = {};
+        let sizes = [];
+
+        try {
+            pr = JSON.parse(req.body.pr || '{}');       // Nếu không có → dùng object rỗng
+            sizes = JSON.parse(req.body.sizes || '[]'); // Nếu không có → dùng mảng rỗng
+        } catch (e) {
+            return res.status(400).json({ success: false, message: "Invalid JSON format in pr or sizes" });
+        }
 
         const image1 = req.files.image1 && req.files.image1[0]
         const image2 = req.files.image2 && req.files.image2[0]

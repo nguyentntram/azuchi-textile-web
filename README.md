@@ -8,4 +8,3 @@ TECHNOLOGIES 💻
 - Database: MongoDB Atlas, Cloudinary
 - APIs: Google API, Cloudinary API
 - Deployment: Vercel (frontend + backend)
-- 

@@ -19,7 +19,7 @@ Azuchi Textile Web offers two main features:
 - Submit contact or inquiry forms directly
 
 🛠️ **Customer Interface**  - A clean and mobile-responsive UI where users can:
-- Browse products by category
+- Add, edit, or delete products with ease
 - View detailed descriptions and images
 - Submit contact or inquiry forms directly
 

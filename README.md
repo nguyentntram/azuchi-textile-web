@@ -8,3 +8,4 @@ AZUCHI TEXTILE website is a full-stack e-commerce website built for Azuchi Texti
 - Database: MongoDB Atlas, Cloudinary
 - APIs: Google API, Cloudinary API
 - Deployment: Vercel (frontend + backend)
+

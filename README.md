@@ -23,9 +23,4 @@ Azuchi Textile Web offers two main features:
 - Upload images via Cloudinary
 - Manage content securely and quickly
 
-🛠️ **Admin Dashboard**  - A private admin panel to help business owners:
-- Browse products by category
-- View detailed descriptions and images
-- Submit contact or inquiry forms directly
-
   ---

@@ -19,8 +19,8 @@ Azuchi Textile Web offers two main features:
 - Submit contact or inquiry forms directly
 
 🛠️ **Admin Dashboard**  - A private admin panel to help business owners:
-- Add, edit, or delete products with ease
-- Upload images via Cloudinary
-- Manage content securely and quickly
+- Browse products by category
+- View detailed descriptions and images
+- Submit contact or inquiry forms directly
 
   ---

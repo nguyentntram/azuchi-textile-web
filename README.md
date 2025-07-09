@@ -12,6 +12,7 @@ AZUCHI TEXTILE website is a full-stack e-commerce website built for Azuchi Texti
 ---
 ## 💥FEATURE
 AZUCHI TEXTILE offers two main features: 
+
 🛍️ **Customer Interface** 
 A clean and mobile-responsive UI where users can:
 - Browse products by category
